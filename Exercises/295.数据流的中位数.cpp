@@ -7,16 +7,38 @@
 // @lc code=start
 class MedianFinder {
 public:
-    MedianFinder() {
+    priority_queue<int, vector<int>, less<int>> queMin;//降序排列，大顶堆less
+    priority_queue<int, vector<int>, greater<int>> queMax;//升序排列 小顶堆great
 
-    }
+    MedianFinder() {}
     
     void addNum(int num) {
-
+        if(queMin.empty()||num<=queMin.top())//num小于等于中位数
+        {
+            queMin.push(num);
+            if(queMax.size()+1<queMin.size())
+            {
+                queMax.push(queMin.top());
+                queMin.pop();
+            }
+        }
+        else
+        {
+            queMax.push(num);
+            if(queMax.size()>queMin.size())
+            {
+                queMin.push(queMax.top());
+                queMax.pop();
+            }
+        }
     }
     
     double findMedian() {
-
+        if(queMin.size()>queMax.size())
+        {
+            return queMin.top();
+        }
+        return (queMin.top()+queMax.top())/2.0;
     }
 };
 
