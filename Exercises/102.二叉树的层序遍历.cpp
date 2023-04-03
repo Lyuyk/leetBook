@@ -19,7 +19,23 @@
 class Solution {
 public:
     vector<vector<int>> levelOrder(TreeNode* root) {
-
+        queue<TreeNode*> tnQueue;
+        vector<vector<int>> res;
+        if(root!=nullptr)tnQueue.push(root);
+        while(!tnQueue.empty())
+        {
+            vector<int> tmp;
+            for(int i= tnQueue.size();i>0;i--)
+            {
+                TreeNode* node = tnQueue.front();
+                tnQueue.pop();
+                tmp.push_back(node->val);
+                if(node->left)tnQueue.push(node->left);
+                if(node->right)tnQueue.push(node->right);
+            }
+            res.push_back(tmp);
+        }
+        return res;
     }
 };
 // @lc code=end
