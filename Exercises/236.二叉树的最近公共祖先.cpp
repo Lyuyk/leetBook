@@ -21,9 +21,10 @@ public:
         TreeNode *left=lowestCommonAncestor(root->left,p,q);
         TreeNode *right=lowestCommonAncestor(root->right,p,q);
 
-        if(!left)return right;
-        else if(!right)return left;
-        else return root;
+        if(left==nullptr && right==nullptr)return nullptr;//左右子树都无pq
+        if(left==nullptr)return right;//pq都不在左子树中
+        if(right==nullptr)return left;//pq都不在右子树中
+        return root;//pq在异侧
     }
 };
 // @lc code=end
