@@ -16,12 +16,13 @@ public:
                 b=-b;
             }
             //按位与判断
-            if(b&1==1){
+            if( b&1 == 1){
                 res=res*x;
             }
             x=x*x;
-            b>>=1; //右移即乘2
+            b>>=1; //右移即删除最后一位
         }
+        return res;
     }
 };
 // @lc code=end
